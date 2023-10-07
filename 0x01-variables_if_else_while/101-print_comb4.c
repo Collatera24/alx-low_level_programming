@@ -2,6 +2,8 @@
 /**
  * main - print numbers in three digits with spaces and commas
  *
+ * Return: always (0)
+ *
  */
 int main(void)
 {
