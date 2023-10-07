@@ -1,17 +1,18 @@
 #include <stdio.h>
 /**
- * main - print alphabets using putchar instead of char
+ * main - prints base ten number
  *
  * Return: always (0)
  *
  */
 int main(void)
 {
-int alphabets = '0';
+char base_ten = '0';
 
-while (alphabets <= '9')
+while (base_ten <= 10)
 {
-putchar(alphabets);
+putchar(base_ten);
+base_ten++;
 }
 putchar('\n');
 return (0);
