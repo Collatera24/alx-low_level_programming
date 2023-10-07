@@ -1,6 +1,5 @@
 #include <stdio.h>
 /**
- *
  * main - print numbers separated bt commas and space
  *
  * Return: (0)
