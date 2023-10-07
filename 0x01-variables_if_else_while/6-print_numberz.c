@@ -7,11 +7,13 @@
  */
 int main(void)
 {
-	int numbers = '0';
+	int c;
 
-	while (numbers <= '9')
+	c = 0;
+	while (c < 10)
 	{
-		putchar(numbers);
+		putchar(c + '0');
+		c++;
 	}
 	putchar('\n');
 	return (0);
