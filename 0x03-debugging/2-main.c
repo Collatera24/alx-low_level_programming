@@ -4,12 +4,7 @@
 /**
  * main - prints the largest of 3 integers
  * Return: 0
- * @a: first integer
- * @b: second integer
- * @c: third integer
  */
-
-int largest_number(int a, int b, int c);
 
 int main(void)
 {
