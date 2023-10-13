@@ -19,9 +19,9 @@ int main(void)
 
 	if (remaining_days != -1)
 
-		printf("Remaining days: %d\n", remaining_days);
-	else
 		printf("Invalid date: %02d/%02d/2000\n", month, day);
+	else
+		printf("Remaining days, %d\n", remaining_days);
 
 	return (0);
 }
