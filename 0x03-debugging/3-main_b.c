@@ -3,7 +3,7 @@
 
 /**
  * main - prints the date 29/02/2000
- *
+ * Return: 0
  */
 
 int main(void)
