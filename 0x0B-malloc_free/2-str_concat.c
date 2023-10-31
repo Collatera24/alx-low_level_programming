@@ -12,7 +12,7 @@
 
 char *str_concat(char *s1, char *s2)
 {
-	unsigned int a, b, c, i, j;
+	unsigned int a, b, i, j;
 	char *ptr;
 
 	if (s1 == NULL)
@@ -44,7 +44,7 @@ char *str_concat(char *s1, char *s2)
 	}
 	for (i = 0; i < a; i++)
 	{
-		ptr[i] = s[i];
+		ptr[i] = s1[i];
 	}
 	for (j = 0; j <= b; j++)
 	{
