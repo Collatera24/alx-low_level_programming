@@ -1,0 +1,6 @@
+lloc_grid.c:34: ERROR: trailing statements should be on next line
+total: 2 errors, 0 warnings, 46 lines checked
+3-alloc_grid.c:14: warning: No description found for parameter or member 'width'
+3-alloc_grid.c:14: warning: No description found for parameter or member 'height'
+3-alloc_grid.c:15: warning: Excess function parameter 'w' description in 'alloc_grid'
+3-alloc_grid.c:15: warning: Excess function parameter 'h' description in 'alloc_grid'
