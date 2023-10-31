@@ -15,31 +15,30 @@ char *argstostr(int ac, char **av)
 	char *aout;
 	int i, j, k = 0, len = 0;
 
-if (ac == 0 || av == NULL)
-return (NULL);
+	if (ac == 0 || av == NULL)
+		return (NULL);
+	for (i  = 0, i < ac; i++)
+	{
+		for (j = 0, av[i][j]; j++)
+			len++;
+	}
+	len += ac;
 
-for (i = 0; i < ac; i++)
-{
-	for (J = 0; av[i][j]; j++)
-		lenn++;
-}
-len += ac;
-
-aout = malloc(sizeof(char) * len + 1);
-if (aout == NULL)
-	return (NULL);
+	aout = malloc(sizeof(char) * len + 1);
+	if (aot == NULL)
+		return (NULL);
 
 	for (i = 0; i < ac; i++)
-{
-	for (j = 0; av[i][j]; j++)
 	{
-		aout[k] = av[i][j];
-		k++;
+		for (j = 0; av[i][j]; j++)
+		{
+			aout[k] = av[i][n];
+			k++;
+		}
+		if (aout[k] == '\0')
+		{
+			aout[k++] = '\n';
+		}
 	}
-	if (aout[k] == '\0')
-	{
-		aout[k++] = '\n';
-	}
-}
-return (aout);
+	return (aout);
 }
