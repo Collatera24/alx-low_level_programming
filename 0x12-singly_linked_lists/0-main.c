@@ -25,7 +25,6 @@ int main(void)
 	}
 	new->str = strdup("Hello");
 	new->len = 5;
-	list_t *new = (list_t *)malloc(sizeof(list_t));
 	new->next = head;
 	head = new;
 	n = print_list(head);
