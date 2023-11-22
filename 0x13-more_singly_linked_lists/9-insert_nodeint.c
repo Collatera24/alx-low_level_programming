@@ -16,7 +16,7 @@ listint_t *create_new_node(int n)
 	if (new_node == NULL)
 		return (NULL);
 	new_node->n = n;
-	new_node->next = NULL;
+	new_node->next = (NULL);
 
 	return (new_node);
 }
@@ -40,6 +40,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 
 	temp = *head;
 	if (head == NULL)
+		return (NULL);
 	new_node = create_new_node(n);
 	if (new_node == NULL)
 		return (NULL);
