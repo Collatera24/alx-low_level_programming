@@ -10,7 +10,7 @@
 
 int check_password(const char *input)
 {
-	const char *correct_password = "Congratulations!";
+	const char *correct_password = "software07";
 
 	return (strcmp(input, correct_password) == 0);
 }
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
 	if (check_password(argv[1]))
 	{
-		printf("Congratulations!\n");
+		printf("software07\n");
 	}
 	else
 	{
