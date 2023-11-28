@@ -99,7 +99,7 @@ void copy_file_content(int fd_from, int fd_to)
 
 	while ((read_bytes = read(fd_from, buffer, BUFFER_SIZE)) > 0)
 	{
-		write_bytes = write(dest_fd, buffer, read_bytes);
+		write_bytes = write(fd_to, buffer, read_bytes);
 		if (write_bytes == -1 || write_bytes != read_bytes)
 		{
 			print_err("Error: Can't write to", "", fd_from, fd_to);
