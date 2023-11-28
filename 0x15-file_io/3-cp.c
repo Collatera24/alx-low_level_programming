@@ -10,18 +10,19 @@
 /**
  * main - Entry point of the program.
  * @program_name: Name of the program
- * Return: Exit.
+ *
+ * Return: Exit code.
  */
 
 void display_usage(char *program_name);
-int open_source_file(char *filename);
-int open_destination_file(char *filename);
-void copy_file_content(int source_fd, int dest_fd);
-void handle_error(char *message, char *filename, int source_fd, int dest_fd);
+int open_src_file(char *filename);
+int open_dest_file(char *filename);
+void copy_file_content(int fd_from, int fd_to);
+void print_err(char *message, char *filename, int fd_from, int fd_to);
 
 int main(int argc, char *argv[])
 {
-	int source_fd, dest_fd;
+	int fd_from, fd_to;
 
 	if (argc != 3)
 	{
@@ -29,13 +30,13 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 
-	source_fd = open_source_file(argv[1]);
-	dest_fd = open_destination_file(argv[2]);
+	fd_from = open_src_file(argv[1]);
+	fd_to = open_dest_file(argv[2]);
 
-	copy_file_content(source_fd, dest_fd);
+	copy_file_content(fd_from, fd_to);
 
-	close(source_fd);
-	close(dest_fd);
+	close(fd_from);
+	close(fd_to);
 
 	return (0);
 }
@@ -51,80 +52,82 @@ void display_usage(char *program_name)
 }
 
 /**
- * open_source_file - Opens the source file for reading.
+ * open_src_file - Opens the source file for reading.
  * @filename: The name of the source file.
+ *
  * Return: The file descriptor of the opened source file.
  */
 
-int open_source_file(char *filename)
+int open_src_file(char *filename)
 {
-	int source_fd = open(filename, O_RDONLY);
+	int fd_from = open(filename, O_RDONLY);
 
-	if (source_fd == -1)
+	if (fd_from == -1)
 	{
-		handle_error("Error: Can't read from file", filename, -1, -1);
+		print_err("Error: Can't read from file", filename, -1, -1);
 	}
-	return (source_fd);
+	return (fd_from);
 }
 
 /**
- * open_destination_file - Opens the destination file for writing.
+ * open_dest_file - Opens the destination file for writing.
  * @filename: The name of the destination file.
+ *
  * Return: The file descriptor of the opened destination file.
  */
 
-int open_destination_file(char *filename)
+int open_dest_file(char *filename)
 {
-	int dest_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	int fd_to = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
-	if (dest_fd == -1)
+	if (fd_to == -1)
 	{
-		handle_error("Error: Can't write to", filename, -1, -1);
+		print_err("Error: Can't write to", filename, -1, -1);
 	}
-	return (dest_fd);
+	return (fd_to);
 }
 
 /**
  * copy_file_content - Copies the content from source file to destination file.
- * @source_fd: File descriptor of the source file.
- * @dest_fd: File descriptor of the destination file.
+ * @fd_from: File descriptor of the source file.
+ * @fd_to: File descriptor of the destination file.
  */
 
-void copy_file_content(int source_fd, int dest_fd)
+void copy_file_content(int fd_from, int fd_to)
 {
-	ssize_t bytes_read, bytes_written;
+	ssize_t read_bytes, write_bytes;
 	char buffer[BUFFER_SIZE];
 
-	while ((bytes_read = read(source_fd, buffer, BUFFER_SIZE)) > 0)
+	while ((read_bytes = read(fd_from, buffer, BUFFER_SIZE)) > 0)
 	{
-		bytes_written = write(dest_fd, buffer, bytes_read);
-		if (bytes_written == -1 || bytes_written != bytes_read)
+		write_bytes = write(dest_fd, buffer, read_bytes);
+		if (write_bytes == -1 || write_bytes != read_bytes)
 		{
-			handle_error("Error: Can't write to", "", source_fd, dest_fd);
+			print_err("Error: Can't write to", "", fd_from, fd_to);
 		}
 	}
-	if (bytes_read == -1)
+	if (read_bytes == -1)
 	{
-		handle_error("Error: Can't read from file", "", source_fd, dest_fd);
+		print_err("Error: Can't read from file", "", fd_from, fd_to);
 	}
 }
 
 
 /**
- * handle_error - Handles errors, displays error message,exits program.
+ * print_err - Prints errors, displays error message,exits program.
  * @message: The error message.
  * @filename: The relevant filename.
- * @source_fd: File descriptor of the source file.
- * @dest_fd: File descriptor of the destination file.
+ * @fd_from: File descriptor of the source file.
+ * @fd_to: File descriptor of the destination file.
  */
 
-void handle_error(char *message, char *filename, int source_fd, int dest_fd)
+void print_err(char *message, char *filename, int fd_from, int fd_to)
 
 {
 	dprintf(2, "%s %s\n", message, filename);
-	if (source_fd != -1)
-		close(source_fd);
-	if (dest_fd != -1)
-		close(dest_fd);
+	if (fd_from != -1)
+		close(fd_from);
+	if (fd_to != -1)
+		close(fd_to);
 	exit(99);
 }
